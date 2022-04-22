@@ -1,0 +1,10 @@
+
+# How to create TLS for kafka
+## Server
+1. Create CA
+    keytool -importkeystore -srckeystore kafka.server.truststore.jks -destkeystore server.p12 -deststoretype PKCS12
+    openssl pkcs12 -in server.p12 -nokeys -out server.cer.pem
+2. Client
+    keytool -importkeystore -srckeystore kafka.server.keystore.jks -destkeystore client.p12 -deststoretype PKCS12
+    openssl pkcs12 -in client.p12 -nokeys -out client.cer.pem
+    openssl pkcs12 -in client.p12 -nodes -nocerts -out client.key.pem
